@@ -119,15 +119,21 @@ const topMenuLinks = document.querySelectorAll('#top-menu a')
 // The second line of code of the function should immediately return if the element clicked was not an <a> element.
 // Log the content of the <a> to verify the handler is working.
 
+
+// The event listener should add the active class to the <a> element that was clicked, unless it was already active, in which case it should remove it.
+// The event listener should remove the active class from each other <a> element in topMenuLinks - whether the active class exists or not.
+// Hint: Removing a non-existent class from an element does not cause an error!
+
+
 topMenuEl.addEventListener('click', function(e){
   e.preventDefault()
   if(e.target.tagName !== 'A') return
-  console.log(e.target.textContent)
+  if (e.target.classList.contains('active')) {
+    e.target.classList.remove('active')
+  } else {
+    topMenuLinks.forEach(function(link){
+      link.classList.remove('active')
+    })
+    e.target.classList.add('active')
+  }
 })
-
-
-// Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
-// Attach a delegated 'click' event listener to topMenuEl.
-// The first line of code of the event listener function should call the event object's preventDefault() method.
-// The second line of code of the function should immediately return if the element clicked was not an <a> element.
-// Log the content of the <a> to verify the handler is working.
