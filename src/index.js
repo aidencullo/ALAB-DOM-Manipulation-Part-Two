@@ -167,10 +167,11 @@ topMenuEl.addEventListener('click', function(e){
     })
     if (link.subLinks) {
       subMenuEl.style.top = '100%'
+      buildSubMenu(link.subLinks)
     } else {
       subMenuEl.style.top = '0'
+      mainEl.innerHTML = `<h1>${e.target.textContent}</h1>`
     }
-    buildSubMenu(link.subLinks)
   }
 })
 
@@ -199,3 +200,27 @@ function buildSubMenu(subLinks){
     subMenuEl.appendChild(aEl)
   })
 }
+
+
+// part 5 last part
+
+// The submenu needs to be dynamic based on the clicked link. To facilitate that, we will create a helper function called buildSubmenu that does the following:
+
+// Attach a delegated 'click' event listener to subMenuEl.
+// The first line of code of the event listener function should call the event object's preventDefault() method.
+// The second line of code within the function should immediately return if the element clicked was not an <a> element.
+// Log the content of the <a> to verify the handler is working.
+// Next, the event listener should set the CSS top property of subMenuEl to 0.
+// Remove the active class from each <a> element in topMenuLinks.
+// Update the contents of mainEl, within an <h1>, to the contents of the <a> element clicked within subMenuEl.
+// If the ABOUT link is clicked, an <h1>About</h1> should be displayed.
+
+
+
+subMenuEl.addEventListener('click', function(e){
+  e.preventDefault()
+  if(e.target.tagName !== 'A') return
+  subMenuEl.style.top = '0';
+  topMenuLinks.forEach(link => link.classList.remove('active'))
+  mainEl.innerHTML = `<h1>${e.target.textContent}</h1>`
+})
