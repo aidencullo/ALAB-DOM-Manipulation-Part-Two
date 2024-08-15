@@ -40,6 +40,7 @@ topMenuEl.classList.add('flex-around')
 
 // Very often, you will be working with data provided by external sources in a variety of ways. For this project, copy the following data structure to the top of your index.js file; you will use it to create your menu buttons.
 // "// Menu data structure
+
 var menuLinks = [
   { text: 'about', href: '/about' },
   { text: 'catalog', href: '/catalog' },
@@ -85,3 +86,48 @@ subMenuEl.classList.add('flex-around')
 
 subMenuEl.style.position = 'absolute'
 subMenuEl.style.top = '0'
+
+// part 4
+
+var menuLinks = [
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
+
+
+
+// Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+const topMenuLinks = document.querySelectorAll('#top-menu a')
+
+
+// Attach a delegated 'click' event listener to topMenuEl.
+
+// The first line of code of the event listener function should call the event object's preventDefault() method.
+// The second line of code of the function should immediately return if the element clicked was not an <a> element.
+// Log the content of the <a> to verify the handler is working.
+
+topMenuEl.addEventListener('click', function(e){
+  e.preventDefault()
+  if(e.target.tagName !== 'A') return
+  console.log(e.target.textContent)
+})
+
+
+// Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+// Attach a delegated 'click' event listener to topMenuEl.
+// The first line of code of the event listener function should call the event object's preventDefault() method.
+// The second line of code of the function should immediately return if the element clicked was not an <a> element.
+// Log the content of the <a> to verify the handler is working.
