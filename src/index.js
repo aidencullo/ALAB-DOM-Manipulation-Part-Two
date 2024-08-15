@@ -170,11 +170,32 @@ topMenuEl.addEventListener('click', function(e){
     } else {
       subMenuEl.style.top = '0'
     }
+    buildSubMenu(link.subLinks)
   }
 })
 
 function removeAllActive(links){
   links.forEach(function(link){
     link.classList.remove('active')
+  })
+}
+
+
+// The submenu needs to be dynamic based on the clicked link. To facilitate that, we will create a helper function called buildSubmenu that does the following:
+
+// Clear the current contents of subMenuEl.
+// Iterate over the subLinks array, passed as an argument, and for each "link" object:
+// Create an <a> element.
+// Add an href attribute to the <a>, with the value set by the href property of the "link" object.
+// Set the element's content to the value of the text property of the "link" object.
+// Append the new element to the subMenuEl.
+
+function buildSubMenu(subLinks){
+  subMenuEl.textContent = '';
+  subLinks.forEach((link) => {
+    const aEl = document.createElement('a');
+    aEl.href = link.href;
+    aEl.textContent = link.text;
+    subMenuEl.appendChild(aEl)
   })
 }
