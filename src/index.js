@@ -125,15 +125,56 @@ const topMenuLinks = document.querySelectorAll('#top-menu a')
 // Hint: Removing a non-existent class from an element does not cause an error!
 
 
+// topMenuEl.addEventListener('click', function(e){
+//   e.preventDefault()
+//   if(e.target.tagName !== 'A') return
+//   if (e.target.classList.contains('active')) {
+//     e.target.classList.remove('active')
+//   } else {
+//     removeAllActive(topMenuLinks)
+//     e.target.classList.add('active')
+//   }
+// })
+
+// function removeAllActive(links){
+//   links.forEach(function(link){
+//     link.classList.remove('active')
+//   })
+// }
+
+
+
+// part 5
+
+
+
+// Within the event listener, if the clicked <a> element does not yet have a class of "active" (it was inactive when clicked):
+// If the clicked <a> element's "link" object within menuLinks has a subLinks property (all do, except for the "link" object for ABOUT), set the CSS top property of subMenuEl to 100%.
+// Otherwise, set the CSS top property of subMenuEl to 0.
+// Hint: Caching the "link" object will come in handy for passing its subLinks array later.
+
+
 topMenuEl.addEventListener('click', function(e){
   e.preventDefault()
   if(e.target.tagName !== 'A') return
   if (e.target.classList.contains('active')) {
     e.target.classList.remove('active')
   } else {
-    topMenuLinks.forEach(function(link){
-      link.classList.remove('active')
-    })
+    removeAllActive(topMenuLinks)
     e.target.classList.add('active')
+    const link = menuLinks.find(function(menuLink){
+      return menuLink.text === e.target.textContent.toLowerCase()
+    })
+    if (link.subLinks) {
+      subMenuEl.style.top = '100%'
+    } else {
+      subMenuEl.style.top = '0'
+    }
   }
 })
+
+function removeAllActive(links){
+  links.forEach(function(link){
+    link.classList.remove('active')
+  })
+}
